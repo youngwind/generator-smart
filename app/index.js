@@ -14,22 +14,22 @@ module.exports = generators.Base.extend({
     var copy = exec('cp -r ' + __dirname + "/demo/. " + this.options.env.cwd);
     copy.on('exit', function (code) {
       console.log('copy done!');
-      console.log('start install npm dependiences');
+      console.log('start install bower dependiences');
 
-      var npmInstall = exec('npm install');
-      npmInstall.on('exit', function (code) {
-        console.log('npm dependiences install done.');
-        console.log('start install bower dependiences');
+      var bowerInstall = exec('bower install');
+      bowerInstall.on('exit', function (code) {
+        console.log('bower dependiences install done.');
+        console.log('start install npm dependiences');
 
-        var bowerInstall = exec('bower install');
-        bowerInstall.on('exit', function (code) {
-          console.log('bower dependiences install done.')
+        var npmInstall = exec('npm install');
+        npmInstall.on('exit', function (code) {
+          console.log('npm dependiences install done.');
           console.log('start gulp');
 
           var gulp = exec('gulp');
           gulp.on('exit', function (code) {
-            console.log('gulp done.')
-            console.log('start the app....')
+            console.log('gulp done.');
+            console.log('start the app....');
 
             var start = exec("npm run start");
             console.log("please visit http://localhost:3000");
