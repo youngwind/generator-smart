@@ -1,0 +1,8 @@
+bower_components
+node_modules
+public
+.idea
+.DS_Store
+*.log
+src/common/config.js
+upload

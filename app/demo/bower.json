@@ -1,0 +1,21 @@
+{
+  "name": "myapp",
+  "description": "",
+  "main": "",
+  "authors": [
+    "liangshaofeng <liangshaofeng@innobuddy.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.9.1"
+  }
+}
