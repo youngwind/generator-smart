@@ -1,23 +1,47 @@
 var generators = require('yeoman-generator');
+
+// 调用shell命令
 var process = require('child_process');
 var exec = process.exec;
-var path = require('path');
 
 module.exports = generators.Base.extend({
-  // The name `constructor` is important here
   constructor: function (args, options, config) {
-    // Calling the super constructor is important so our generator is correctly set up
     generators.Base.apply(this, arguments);
-
-    // Next, add your custom code
-    this.option('coffee'); // This method adds support for a `--coffee` flag
   },
-  copy: function () {
-    var last = exec('cp -r '+ __dirname + "/demo/. " + this.options.env.cwd);
-    var test2 = exec('ls');
+  init: function () {
+    // 这里还没想好怎么优化，只能先嵌套了！
+    console.log('start copy');
+    var copy = exec('cp -r ' + __dirname + "/demo/. " + this.options.env.cwd);
+    copy.on('exit', function (code) {
+      console.log('copy done!');
+      console.log('start install npm dependiences');
 
-    last.on('exit', function (code) {
-      console.log('文件复制成功！');
+      var npmInstall = exec('npm install');
+      npmInstall.on('exit', function (code) {
+        console.log('npm dependiences install done.');
+        console.log('start install bower dependiences');
+
+        var bowerInstall = exec('bower install');
+        bowerInstall.on('exit', function (code) {
+          console.log('bower dependiences install done.')
+          console.log('start gulp');
+
+          var gulp = exec('gulp');
+          gulp.on('exit', function (code) {
+            console.log('gulp done.')
+            console.log('start the app....')
+
+            var start = exec("npm run start");
+            console.log("please visit http://localhost:3000");
+
+          })
+
+        })
+
+      });
+
+
     });
+
   }
 });
