@@ -13,7 +13,7 @@ module.exports = generators.Base.extend({
     this.option('coffee'); // This method adds support for a `--coffee` flag
   },
   copy: function () {
-    var last = exec('cp -r '+ __dirname + "/demo/* " + this.options.env.cwd);
+    var last = exec('cp -r '+ __dirname + "/demo/. " + this.options.env.cwd);
     var test2 = exec('ls');
 
     last.on('exit', function (code) {
